@@ -1,7 +1,7 @@
 const farmerMaker = (farmer) => {
   let domString = '';
   domString += '<div class="col-3">';
-  domString += '<div class="card">';
+  domString += '<div class="card farmer-card">';
   domString += '<div class="card-header">';
   domString += `<h3 class="card-title"><strong>${farmer.name}</strong></h3>`;
   domString += '</div>';

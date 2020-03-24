@@ -10,6 +10,8 @@ const init = () => {
   authData.checkLoginStatus();
   auth.loginButton();
   myNavbar.logoutEvent();
+  $('body').on('mouseenter', '.farmer-card', (e) => e.target.closest('.card').classList.add('bg-success'));
+  $('body').on('mouseleave', '.farmer-card', (e) => e.target.closest('.card').classList.remove('bg-success'));
 };
 
 init();
