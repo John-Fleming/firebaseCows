@@ -6,8 +6,8 @@ const buildCows = () => {
   cowData.getCows()
     .then((cows) => {
       let domString = '';
-      domString += '<h2 class="text-center">Pasture</h2>';
-      domString += '<div class="d-flex flex-wrap>';
+      domString += '<h2 class="text-center mt-5 mb-2">Pasture</h2>';
+      domString += '<div class="d-flex flex-wrap justify-content-center">';
       cows.forEach((cow) => {
         domString += cowComponent.cowMaker(cow);
       });
