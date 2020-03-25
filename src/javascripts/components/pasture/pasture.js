@@ -5,6 +5,7 @@ import utils from '../../helpers/utils';
 
 const removeCow = (e) => {
   const cowId = e.target.closest('.card').id;
+  console.error(cowId);
   smash.completelyRemoveCow(cowId)
     .then(() => {
       // eslint-disable-next-line no-use-before-define

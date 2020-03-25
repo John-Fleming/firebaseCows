@@ -9,9 +9,7 @@ const getSingleFarmerWithCows = (farmerId) => new Promise((resolve, reject) => {
       farmer.id = farmerId;
       farmer.cows = [];
       farmerCowData.getFarmerCowsByFarmerUid(farmer.uid).then((farmerCows) => {
-        console.log('farmer cows', farmerCows);
         cowData.getCows().then((allCows) => {
-          console.log('all cows', allCows);
           farmerCows.forEach((farmerCow) => {
             const cow = allCows.find((x) => x.id === farmerCow.cowId);
             farmer.cows.push(cow);
@@ -28,7 +26,7 @@ const completelyRemoveCow = (cowId) => new Promise((resolve, reject) => {
     .then(() => {
       farmerCowData.getFarmerCowsByCowId(cowId).then((farmerCows) => {
         farmerCows.forEach((farmerCow) => {
-          farmerCowData.deleteFarmerCow(farmerCow);
+          farmerCowData.deleteFarmerCow(farmerCow.id);
         });
         resolve();
       });

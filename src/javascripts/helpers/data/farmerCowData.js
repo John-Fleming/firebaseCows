@@ -31,6 +31,6 @@ const getFarmerCowsByCowId = (cowId) => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
-const deleteFarmerCow = (farmerCowId) => axios.delete(`${baseUrl}/farmerCows/${farmerCowId}`);
+const deleteFarmerCow = (farmerCowId) => axios.delete(`${baseUrl}/farmerCows/${farmerCowId}.json`);
 
 export default { getFarmerCowsByFarmerUid, getFarmerCowsByCowId, deleteFarmerCow };
