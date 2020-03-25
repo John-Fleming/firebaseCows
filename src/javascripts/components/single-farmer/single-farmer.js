@@ -5,7 +5,6 @@ const buildSingleFarmer = (e) => {
   const farmerId = e.target.closest('.card').id;
   smash.getSingleFarmerWithCows(farmerId)
     .then((singleFarmer) => {
-      console.log('single farmer', singleFarmer);
       let domString = '';
       domString += '<h2 class="text-center mt-5 mb-2">Featured Farmer</h2>';
       domString += '<div class="col-12">';
