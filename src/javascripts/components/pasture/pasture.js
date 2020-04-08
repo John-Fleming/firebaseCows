@@ -34,7 +34,7 @@ const makeACow = (e) => {
 };
 
 const buildCows = () => {
-  cowData.getCows()
+  smash.getCowsWithOwners()
     .then((cows) => {
       let domString = '';
       domString += '<h2 class="text-center mt-5 mb-2">Pasture</h2>';
