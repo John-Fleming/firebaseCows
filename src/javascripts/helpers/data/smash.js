@@ -39,9 +39,6 @@ const getCowsWithOwners = () => new Promise((resolve, reject) => {
     .then((cowsResponse) => {
       farmerData.getFarmers().then((farmerResponse) => {
         farmerCowData.getFarmerCows().then((farmerCowResponse) => {
-          console.log('cowsResponse', cowsResponse);
-          console.log('farmerResponse', farmerResponse);
-          console.log('farmerCowResponse', farmerCowResponse);
           const finalCows = [];
           cowsResponse.forEach((oneCow) => {
             const cow = { farmers: [], ...oneCow };
@@ -50,11 +47,11 @@ const getCowsWithOwners = () => new Promise((resolve, reject) => {
               const farmer = { ...oneFarmer };
               const isOwner = farmerCowOwners.find((x) => x.farmerUid === farmer.uid);
               farmer.isChecked = isOwner !== undefined;
+              farmer.farmerCowId = isOwner ? isOwner.id : `nope-${cow.id}-${farmer.id}`;
               cow.farmers.push(farmer);
             });
             finalCows.push(cow);
           });
-          console.log('finalCows', finalCows);
           resolve(finalCows);
         });
       });
