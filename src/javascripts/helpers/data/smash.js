@@ -34,4 +34,29 @@ const completelyRemoveCow = (cowId) => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
-export default { getSingleFarmerWithCows, completelyRemoveCow };
+const getCowsWithOwners = () => new Promise((resolve, reject) => {
+  cowData.getCows()
+    .then((cowsResponse) => {
+      farmerData.getFarmers().then((farmerResponse) => {
+        farmerCowData.getFarmerCows().then((farmerCowResponse) => {
+          const finalCows = [];
+          cowsResponse.forEach((oneCow) => {
+            const cow = { farmers: [], ...oneCow };
+            const farmerCowOwners = farmerCowResponse.filter((x) => x.cowId === cow.id);
+            farmerResponse.forEach((oneFarmer) => {
+              const farmer = { ...oneFarmer };
+              const isOwner = farmerCowOwners.find((x) => x.farmerUid === farmer.uid);
+              farmer.isChecked = isOwner !== undefined;
+              farmer.farmerCowId = isOwner ? isOwner.id : `nope-${cow.id}-${farmer.id}`;
+              cow.farmers.push(farmer);
+            });
+            finalCows.push(cow);
+          });
+          resolve(finalCows);
+        });
+      });
+    })
+    .catch((err) => reject(err));
+});
+
+export default { getSingleFarmerWithCows, completelyRemoveCow, getCowsWithOwners };

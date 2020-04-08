@@ -3,6 +3,7 @@ import smash from '../../helpers/data/smash';
 import cowComponent from '../cow/cow';
 import newCowComponent from '../newCow/newCow';
 import utils from '../../helpers/utils';
+import farmerCowData from '../../helpers/data/farmerCowData';
 
 const removeCow = (e) => {
   const cowId = e.target.closest('.card').id;
@@ -33,8 +34,36 @@ const makeACow = (e) => {
     .catch((err) => console.error('could not add cow', err));
 };
 
+const farmerCowController = (e) => {
+  e.preventDefault();
+  if (e.target.checked) {
+    const newFarmerCow = {
+      cowId: e.target.closest('.card').id,
+      farmerUid: e.target.dataset.farmerUid,
+    };
+    farmerCowData.addFarmerCow(newFarmerCow)
+      .then(() => {
+        // eslint-disable-next-line no-use-before-define
+        buildCows();
+        utils.printToDom('new-cow', '');
+        utils.printToDom('single-farmer', '');
+      })
+      .catch((err) => console.error('could not create a farmer cow', err));
+  } else {
+    const farmerCowId = e.target.id;
+    farmerCowData.deleteFarmerCow(farmerCowId)
+      .then(() => {
+        // eslint-disable-next-line no-use-before-define
+        buildCows();
+        utils.printToDom('new-cow', '');
+        utils.printToDom('single-farmer', '');
+      })
+      .catch((err) => console.error('could not delete farmer cow', err));
+  }
+};
+
 const buildCows = () => {
-  cowData.getCows()
+  smash.getCowsWithOwners()
     .then((cows) => {
       let domString = '';
       domString += '<h2 class="text-center mt-5 mb-2">Pasture</h2>';
@@ -45,11 +74,15 @@ const buildCows = () => {
       });
       domString += '</div>';
       utils.printToDom('pasture', domString);
-      $('body').on('click', '.delete-cow', removeCow);
-      $('body').on('click', '#cow-creator-btn', makeACow);
       $('#show-add-cow-form').click(newCowComponent.showForm);
     })
     .catch((err) => console.error('get cows broke', err));
 };
 
-export default { buildCows };
+const pastureEvents = () => {
+  $('body').on('click', '.delete-cow', removeCow);
+  $('body').on('click', '#cow-creator-btn', makeACow);
+  $('body').on('click', '.farmer-cow-checkbox', farmerCowController);
+};
+
+export default { buildCows, pastureEvents };
