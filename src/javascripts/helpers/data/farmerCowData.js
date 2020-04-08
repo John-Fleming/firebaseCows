@@ -45,6 +45,8 @@ const getFarmerCows = () => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
+const addFarmerCow = (newFarmerCow) => axios.post(`${baseUrl}/farmerCows.json`, newFarmerCow);
+
 const deleteFarmerCow = (farmerCowId) => axios.delete(`${baseUrl}/farmerCows/${farmerCowId}.json`);
 
 export default {
@@ -52,4 +54,5 @@ export default {
   getFarmerCowsByCowId,
   deleteFarmerCow,
   getFarmerCows,
+  addFarmerCow,
 };
