@@ -8,7 +8,8 @@ const pastureDiv = $('#pasture');
 const farmerDiv = $('#farmhouse');
 const singleFarmerDiv = $('#single-farmer');
 const newCowDiv = $('#new-cow');
-const logoutButton = $('#navbar-logout-button');
+const editCowDiv = $('#edit-cow');
+const logoutButton = $('#google-auth');
 
 const checkLoginStatus = () => {
   firebase.auth().onAuthStateChanged((user) => {
@@ -19,6 +20,7 @@ const checkLoginStatus = () => {
       farmerDiv.removeClass('hide');
       singleFarmerDiv.removeClass('hide');
       newCowDiv.removeClass('hide');
+      editCowDiv.removeClass('hide');
       logoutButton.removeClass('hide');
       pasture.buildCows();
       pasture.pastureEvents();
@@ -30,6 +32,7 @@ const checkLoginStatus = () => {
       farmerDiv.addClass('hide');
       singleFarmerDiv.addClass('hide');
       newCowDiv.addClass('hide');
+      editCowDiv.addClass('hide');
       logoutButton.addClass('hide');
     }
   });

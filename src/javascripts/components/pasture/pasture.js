@@ -4,6 +4,12 @@ import cowComponent from '../cow/cow';
 import newCowComponent from '../newCow/newCow';
 import utils from '../../helpers/utils';
 import farmerCowData from '../../helpers/data/farmerCowData';
+import editCow from '../editCow/editCow';
+
+const editCowEvent = (e) => {
+  e.preventDefault();
+  editCow.showEditForm();
+};
 
 const removeCow = (e) => {
   const cowId = e.target.closest('.card').id;
@@ -81,6 +87,7 @@ const buildCows = () => {
 
 const pastureEvents = () => {
   $('body').on('click', '.delete-cow', removeCow);
+  $('body').on('click', '.edit-cow', editCowEvent);
   $('body').on('click', '#cow-creator-btn', makeACow);
   $('body').on('click', '.farmer-cow-checkbox', farmerCowController);
 };
