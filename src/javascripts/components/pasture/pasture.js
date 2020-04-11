@@ -8,7 +8,8 @@ import editCow from '../editCow/editCow';
 
 const editCowEvent = (e) => {
   e.preventDefault();
-  editCow.showEditForm();
+  const cowId = e.target.closest('.card').id;
+  editCow.showEditForm(cowId);
 };
 
 const removeCow = (e) => {
