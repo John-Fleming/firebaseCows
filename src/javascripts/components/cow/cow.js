@@ -9,7 +9,8 @@ const cowMaker = (cow) => {
   domString += `<p class="card-text">Breed: ${cow.breed}</p>`;
   domString += `<p class="card-text">Weight: ${cow.weight}</p>`;
   domString += `<p class="card-text">Location: ${cow.location}</p>`;
-  domString += '<button class="btn btn-danger delete-cow"><i class="far fa-trash-alt text-center"></i></button>';
+  domString += '<button class="btn btn-danger delete-cow mx-1"><i class="far fa-trash-alt text-center"></i></button>';
+  domString += '<button class="btn btn-primary edit-cow mx-1"><i class="fas fa-pencil-alt text-center"></i></button>';
   domString += '<p class="card-text mt-2">Owner(s)</p>';
   domString += '<form>';
   cow.farmers.forEach((farmer) => {
